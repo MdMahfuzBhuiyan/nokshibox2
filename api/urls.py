@@ -10,6 +10,7 @@ router.register(r'products', ProductViewSet)
 
 urlpatterns = [
     # Template views
+    path('base/', views_templates.base, name='base'),
     path('', views_templates.buyer_home, name='buyer_home'),
     path('signup/', views_templates.signup_view, name='signup'),
     path('login/', views_templates.login_view, name='login'),
