@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ seller.full_name }} - NokshiBox{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        {% if seller.photo %}
+            <img src="{{ seller.photo.url }}" class="img-fluid rounded" alt="{{ seller.full_name }}">
+        {% endif %}
+        <h3>{{ seller.full_name }}</h3>
+        <p><strong>Email:</strong> {{ seller.email }}</p>
+        <p><strong>Mobile:</strong> {{ seller.mobile_no }}</p>
+    </div>
+    <div class="col-md-8">
+        <h4>Products by {{ seller.full_name }}</h4>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">${{ product.price }}</p>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
