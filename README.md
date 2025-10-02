@@ -1,6 +1,6 @@
 # NokshiBox
 
-A basic Django e-commerce platform for buyers and sellers.
+A simple e-commerce platform for Bangladeshi artisans.
 
 ## Features
 - Buyer & seller roles
