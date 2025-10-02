@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.title }} - NokshiBox{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.title }}">
+    </div>
+    <div class="col-md-6">
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.details }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <a href="{% url 'profile' product.seller.id %}" class="btn btn-primary">Contact Seller</a>
+    </div>
+</div>
+{% endblock %}

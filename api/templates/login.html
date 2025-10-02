@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - NokshiBox{% endblock %}
+
+{% block content %}
+<h3>Login</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+  {% endif %}
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<p class="mt-2">
+  Don't have an account? <a href="{% url 'signup' %}">Sign Up</a> |
+  <a href="{% url 'forget_password_request' %}">Forgot Password?</a>
+</p>
+{% endblock %}

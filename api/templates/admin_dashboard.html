@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Welcome, Admin!</h2>
+    <a href="{% url 'admin_logout' %}" class="btn btn-secondary float-end">Logout</a>
+    <hr>
+
+    <!-- USERS -->
+    <h4>Users</h4>
+    <form method="get" class="row g-3 mb-3">
+        <div class="col-md-3">
+            <label class="form-label">Filter by Role</label>
+            <select name="role" class="form-select" onchange="this.form.submit()">
+                <option value="">All Roles</option>
+                <option value="buyer" {% if role_filter == "buyer" %}selected{% endif %}>Buyer</option>
+                <option value="seller" {% if role_filter == "seller" %}selected{% endif %}>Seller</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Filter by Email</label>
+            <input type="text" name="user_email" class="form-control"
+                   value="{{ user_email_filter|default:'' }}" placeholder="Enter user email">
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td>
+                    <a href="{% url 'delete_entry' 'user' user.id %}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this user?')">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">No users found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- PRODUCTS -->
+    <h4>Products</h4>
+    <form method="get" class="row g-3 mb-3">
+        <div class="col-md-3">
+            <label class="form-label">Filter by Category</label>
+            <select name="category" class="form-select" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if category_filter == cat.id|stringformat:"s" %}selected{% endif %}>
+                        {{ cat.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Filter by Seller Email</label>
+            <input type="text" name="seller_email" class="form-control"
+                   value="{{ seller_email_filter|default:'' }}" placeholder="Enter seller email">
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Title</th><th>Seller</th><th>Category</th><th>Actions</th></tr></thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.seller.email }}</td>
+                <td>{{ product.category.name }}</td>
+                <td>
+                    <a href="{% url 'delete_entry' 'product' product.id %}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this product?')">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="5">No products found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- CATEGORIES -->
+    <h4>Categories</h4>
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        <div class="mb-2">
+            {{ form.name.label_tag }} {{ form.name }}
+        </div>
+        <div class="mb-2">
+            {{ form.description.label_tag }} {{ form.description }}
+        </div>
+        <button type="submit" class="btn btn-success">Add Category</button>
+    </form>
+
+    <table class="table table-striped">
+        <thead><tr><th>ID</th><th>Name</th><th>Description</th><th>Actions</th></tr></thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.description }}</td>
+                <td>
+                    <a href="{% url 'delete_entry' 'category' category.id %}" class="btn btn-danger btn-sm"
+                       onclick="return confirm('Delete this category?')">Delete</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">No categories found.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
