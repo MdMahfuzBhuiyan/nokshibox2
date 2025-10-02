@@ -1,6 +1,6 @@
 # NokshiBox
 
-A basic Django e-commerce platform for buyers and sellers.
+A simple e-commerce platform for Bangladeshi artisans.
 
 ## Features
 - Buyer & seller roles
@@ -57,16 +57,4 @@ python manage.py createsuperuser
 
 ```bash
 python manage.py runserver
-```
 
-7. **Access the site**
-
-* Buyer home: `http://127.0.0.1:8000/`
-* Seller home: `http://127.0.0.1:8000/seller/`
-* Admin: `http://127.0.0.1:8000/admin/`
-
-## Notes
-
-* Media files are stored in `media/`.
-* `venv/` and `media/` are excluded from git.
-* For testing, add some categories via admin or shell.
