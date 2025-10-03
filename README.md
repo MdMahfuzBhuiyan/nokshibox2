@@ -17,7 +17,6 @@ A simple e-commerce platform for Bangladeshi artisans.
 
 ## Setup Instructions
 
-
 1. **Create & activate virtual environment**
 
 ```bash
