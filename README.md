@@ -17,14 +17,8 @@ A simple e-commerce platform for Bangladeshi artisans.
 
 ## Setup Instructions
 
-1. **Clone the repository**
 
-```bash
-git clone https://github.com/osama-bq/nokshibox.git
-cd nokshibox
-````
-
-2. **Create & activate virtual environment**
+1. **Create & activate virtual environment**
 
 ```bash
 python -m venv venv
@@ -34,26 +28,26 @@ venv\Scripts\activate
 source venv/bin/activate
 ```
 
-3. **Install dependencies**
+2. **Install dependencies**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Apply migrations**
+3. **Apply migrations**
 
 ```bash
 python manage.py makemigrations api
 python manage.py migrate
 ```
 
-5. **Create superuser (optional)**
+4. **Create superuser (optional)**
 
 ```bash
 python manage.py createsuperuser
 ```
 
-6. **Run server**
+5. **Run server**
 
 ```bash
 python manage.py runserver
