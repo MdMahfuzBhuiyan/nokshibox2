@@ -8,6 +8,15 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.conf import settings
 
 
+# home page
+def home(request):
+    return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+
+
 # Landing page for buyer or unregistered user
 def buyer_home(request):
     products = Product.objects.all()

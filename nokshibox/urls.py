@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # Template views
+    path('', views_templates.home, name='home'),
+    path('about/', views_templates.about, name='about'),
     path('', views_templates.buyer_home, name='buyer_home'),
     path('signup/', views_templates.signup_view, name='signup'),
     path('login/', views_templates.login_view, name='login'),

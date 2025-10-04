@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - NokshiBox{% endblock %}
+
+{% block content %}
+
+
+
+<!-- About + Team Section Wrapper with Gradient Background & Soft Shimmer -->
+<section class="py-20 relative overflow-hidden shimmer-bg">
+
+  <!-- About Section -->
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-start gap-12">
+
+    <!-- Left: 3 images -->
+    <div class="w-full md:w-1/2 flex flex-row gap-4 justify-center transform transition duration-1000 ease-out animate-fadeInLeft">
+      <img src="{% static 'image/about1.jpg' %}" alt="About Image 1" class="w-1/3 h-72 rounded-2xl shadow-lg object-cover border-4 border-gray-500 p-1 hover:scale-105 hover:-translate-y-1 transition-transform duration-500">
+      <img src="{% static 'image/about2.jpg' %}" alt="About Image 2" class="w-1/3 h-72 mt-4 rounded-2xl shadow-lg object-cover border-4 border-gray-500 p-1 hover:scale-105 hover:-translate-y-1 transition-transform duration-500">
+      <img src="{% static 'image/about3.jpg' %}" alt="About Image 3" class="w-1/3 h-72 mt-8 rounded-2xl shadow-lg object-cover border-4 border-gray-500 p-1 hover:scale-105 hover:-translate-y-1 transition-transform duration-500">
+    </div>
+
+    <!-- Right: About Us Text -->
+    <div class="w-full md:w-1/2 transform transition duration-1000 ease-out animate-fadeInRight">
+      <h2 class="text-3xl font-bold text-gray-900 mb-6 relative inline-block">
+  About Us
+  <!-- Centered Short Wavy Underline -->
+  <svg class="absolute left-1/2 -bottom-2 w-16 h-3 transform -translate-x-1/2" viewBox="0 0 64 10" preserveAspectRatio="none">
+    <path d="M0 5 C8 0, 16 10, 24 5 S40 0, 48 5 S64 10, 64 5" stroke="#000" stroke-width="2" fill="transparent"/>
+  </svg>
+</h2>
+
+
+
+      <p class="text-gray-700 leading-relaxed text-lg">
+        NokshiBox is a simple online platform that connects Bangladeshi artisans with people looking for meaningful handmade gifts.
+        We empower women, students, and home-based crafters to easily showcase and sell their creations.
+        Our mission is to celebrate local craftsmanship, support small businesses, and make handmade gifting effortless and special.
+        By bridging creators and customers, NokshiBox builds a supportive community where creativity thrives, culture is preserved, and every gift carries a personal story.
+        Together, we aim to redefine gifting with authenticity, love, and sustainability.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Meet Our Team Section -->
+  <div class="text-center mb-12 mt-24">
+    <h2 class="text-3xl font-bold text-gray-900 relative inline-block">
+      Meet Our Team
+      <!-- Static Wavy Underline -->
+      <svg class="absolute left-1/2 transform -translate-x-1/2 -bottom-2 w-24 h-3" viewBox="0 0 120 10" preserveAspectRatio="none">
+        <path d="M0 5 C15 0, 30 10, 45 5 S75 0, 90 5 S120 10, 120 5" stroke="#000" stroke-width="2" fill="transparent"/>
+      </svg>
+    </h2>
+
+    <p class="text-gray-700 mt-3 text-lg">
+      Meet the talented people behind NokshiBox
+    </p>
+  </div>
+
+  <!-- Team Grid with Photo Frames & Glows -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto px-6 lg:px-12">
+
+  <!-- Member 1 -->
+  <div class="relative flex flex-row items-center bg-white rounded-2xl shadow-lg p-6 transform transition duration-700 ease-out hover:scale-105 animate-fadeInLeft border-2 border-gray-300 overflow-hidden">
+    <!-- Glow behind frame -->
+    <div class="absolute -left-6 -top-6 w-44 h-44 rounded-full bg-pink-200 opacity-30 blur-3xl animate-glow1"></div>
+    <!-- Photo Frame -->
+    <div class="relative z-10 w-36 h-36 rounded-full border-4 border-pink-400 p-1 shadow-inner">
+      <img src="{% static 'image/team1.jpg' %}" alt="Team Member 1" class="w-full h-full rounded-full object-cover">
+    </div>
+    <div class="text-left ml-6 relative z-10">
+      <h3 class="text-xl font-semibold text-gray-900">Faria Khan</h3>
+      <p class="text-gray-600 mb-2">Founder & CEO</p>
+      <p class="text-gray-700 italic">“Empowering artisans to showcase their creativity!”</p>
+    </div>
+  </div>
+
+  <!-- Member 2 -->
+  <div class="relative flex flex-row items-center bg-white rounded-2xl shadow-lg p-6 transform transition duration-700 ease-out hover:scale-105 animate-fadeInRight delay-200 border-2 border-gray-300 overflow-hidden">
+    <div class="absolute -left-6 -top-6 w-44 h-44 rounded-full bg-yellow-200 opacity-30 blur-3xl animate-glow2"></div>
+    <div class="relative z-10 w-36 h-36 rounded-full border-4 border-yellow-400 p-1 shadow-inner">
+      <img src="{% static 'image/team2.jpg' %}" alt="Team Member 2" class="w-full h-full rounded-full object-cover">
+    </div>
+    <div class="text-left ml-6 relative z-10">
+      <h3 class="text-xl font-semibold text-gray-900">Md. Mahfuz Bhuiyan</h3>
+      <p class="text-gray-600 mb-2">Head of Operations</p>
+      <p class="text-gray-700 italic">“Connecting creators with the world effortlessly.”</p>
+    </div>
+  </div>
+
+  <!-- Member 3 (Centered Below) -->
+  <div class="relative flex flex-row items-center bg-white rounded-2xl shadow-lg p-6 transform transition duration-700 ease-out hover:scale-105 animate-fadeInUp md:col-span-2 justify-center max-w-2xl w-full mx-auto border-2 border-gray-300 overflow-hidden">
+    <div class="absolute -left-6 -top-6 w-44 h-44 rounded-full bg-purple-200 opacity-30 blur-3xl animate-glow3"></div>
+    <div class="relative z-10 w-36 h-36 rounded-full border-4 border-purple-400 p-1 shadow-inner">
+      <img src="{% static 'image/team3.jpg' %}" alt="Team Member 3" class="w-full h-full rounded-full object-cover">
+    </div>
+    <div class="text-left ml-6 relative z-10">
+      <h3 class="text-xl font-semibold text-gray-900">Mazida Hakim Anisha</h3>
+      <p class="text-gray-600 mb-2">Creative Director</p>
+      <p class="text-gray-700 italic">“Handmade gifts are the heart of our brand.”</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Tailwind Custom Animations -->
+<style>
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes glow1 { 0%,100%{opacity:0.2; transform:scale(1)} 50%{opacity:0.35; transform:scale(1.1)} }
+@keyframes glow2 { 0%,100%{opacity:0.2; transform:scale(1)} 50%{opacity:0.35; transform:scale(1.05)} }
+@keyframes glow3 { 0%,100%{opacity:0.2; transform:scale(1)} 50%{opacity:0.35; transform:scale(1.08)} }
+
+.animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out forwards; }
+.animate-fadeInRight { animation: fadeInRight 0.8s ease-out forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fadeInRight.delay-200 { animation-delay: 0.2s; }
+
+.animate-glow1 { animation: glow1 3s ease-in-out infinite; }
+.animate-glow2 { animation: glow2 3s ease-in-out infinite; }
+.animate-glow3 { animation: glow3 3s ease-in-out infinite; }
+</style>
+
+
+
+<!-- Animations & Shimmer -->
+<style>
+/* Fade Animations */
+@keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+.animate-fadeInLeft { animation: fadeInLeft 0.8s ease-out forwards; }
+.animate-fadeInRight { animation: fadeInRight 0.8s ease-out forwards; }
+.animate-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fadeInRight.delay-200 { animation-delay: 0.2s; }
+
+/* Soft Shimmer Background */
+.shimmer-bg {
+  background: linear-gradient(180deg, #ffe6e6 0%, #f8d6c4 50%, #f0bfa0 100%);
+  position: relative;
+  overflow: hidden;
+}
+.shimmer-bg::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  transform: rotate(25deg);
+  animation: shimmer 12s linear infinite;
+}
+@keyframes shimmer {
+  0% { transform: rotate(25deg) translate(-100%, -100%); }
+  100% { transform: rotate(25deg) translate(100%, 100%); }
+}
+</style>
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}NokshiBox{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section class="relative w-full h-screen overflow-hidden">
+    <img src="{% static 'image/bannerr.jpg' %}"
+         class="absolute inset-0 w-full h-full object-cover animate-fadeInHero"
+         alt="Hero Background">
+    <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+</section>
+
+<!-- Simple Fade-in Animation -->
+<style>
+@keyframes fadeInHero {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-fadeInHero {
+  animation: fadeInHero 2s ease-out forwards;
+}
+</style>
+
+
+
+<!-- Messages Section -->
+<section class="py-20" style="background: linear-gradient(135deg, #fff7f7 0%, #fff0e0 100%);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+    <!-- Section Divider -->
+    <div class="w-24 h-1 bg-gray-400 mx-auto mb-12 rounded-full"></div>
+
+    <!-- Grid layout -->
+    <div class="grid md:grid-cols-2 gap-12 items-start">
+
+      <!-- Seller Card -->
+      <div class="relative transform transition duration-700 ease-out opacity-0 translate-y-8 scroll-animate">
+        <div class="bg-white rounded-3xl shadow-lg p-10 hover:shadow-2xl transition duration-500">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+            Hi, Seller <span class="ml-2 text-red-500 text-3xl animate-pulse">♡</span>
+          </h2>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">
+            “Welcome to NokshiBox – A Simple Space to Share Your Creativity”
+          </h3>
+          <p class="text-gray-600 leading-relaxed text-base">
+            Turn your passion into opportunity! NokshiBox makes it easy for artisans,
+            students, and hobbyists to showcase and sell handmade products without
+            any technical hassle. Upload your creations with photos, descriptions,
+            and prices, and connect directly with buyers who value authentic handmade gifts.
+          </p>
+        </div>
+        <!-- Decorative Accent Circle -->
+        <div class="absolute -top-8 -left-8 w-12 h-12 bg-red-100 rounded-full opacity-40"></div>
+        <div class="absolute -bottom-8 -right-8 w-16 h-16 bg-yellow-100 rounded-full opacity-30"></div>
+      </div>
+
+      <!-- Customer Card -->
+      <div class="relative transform transition duration-700 ease-out opacity-0 translate-y-8 scroll-animate">
+        <div class="bg-white rounded-3xl shadow-lg p-10 hover:shadow-2xl transition duration-500">
+          <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+            Hi, Customer <span class="ml-2 text-red-500 text-3xl animate-pulse">♡</span>
+          </h2>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">
+            “Welcome to NokshiBox – Your Destination for Handmade Treasures”
+          </h3>
+          <p class="text-gray-600 leading-relaxed text-base">
+            Discover unique, heartfelt gifts crafted by local Bangladeshi artisans.
+            From resin art and candles to gypsum crafts and more, every item is made
+            with passion and creativity. Browse by category or occasion, connect
+            directly with creators for custom requests, and find the perfect gift
+            that tells a story.
+          </p>
+        </div>
+        <!-- Decorative Accent Circle -->
+        <div class="absolute -top-10 -right-10 w-16 h-16 bg-pink-100 rounded-full opacity-30"></div>
+        <div class="absolute -bottom-6 -left-6 w-12 h-12 bg-green-100 rounded-full opacity-40"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Scroll Animation Script -->
+<script>
+const scrollElements = document.querySelectorAll('.scroll-animate');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.remove('opacity-0', 'translate-y-8');
+      entry.target.classList.add('opacity-100', 'translate-y-0');
+      entry.target.style.transition = 'all 1s ease-out';
+    }
+  });
+}, { threshold: 0.2 });
+
+scrollElements.forEach(el => observer.observe(el));
+</script>
+
+<!-- Optional Tailwind Classes -->
+<style>
+.opacity-0 { opacity: 0; }
+.opacity-100 { opacity: 1; }
+.translate-y-8 { transform: translateY(2rem); }
+.translate-y-0 { transform: translateY(0); }
+</style>
+
+
+
+
+{% endblock %}
