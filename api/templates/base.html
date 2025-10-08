@@ -14,9 +14,10 @@
 
     <!-- Brittany Font -->
     <link href="https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap" rel="stylesheet">
-
     <!-- Delius Swash Caps Font -->
     <link href="https://fonts.googleapis.com/css2?family=Delius+Swash+Caps&display=swap" rel="stylesheet">
+    <!-- Great Vibes Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
     <style>
       @keyframes shine {
@@ -37,10 +38,10 @@
     ✨ Check out our latest arrivals! Fresh products added this week. ✨
   </span>
 </div>
+
 {% if request.user.is_authenticated and not request.user.profile_completed %}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  Please <a href="{% url 'edit_profile' request.user.pk %}" class="alert-link">complete your profile</a> to secure your account.
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<div class="alert alert-warning alert-dismissible fade show text-center py-2" role="alert">
+  Please <a href="{% url 'edit_profile' request.user.pk %}" class="underline font-semibold text-red-600">complete your profile</a> to secure your account.
 </div>
 {% endif %}
 
@@ -49,14 +50,11 @@
     <div class="flex items-center justify-between px-6 py-3 w-full max-w-full mx-auto">
         <!-- Left: Brand + Search -->
         <div class="flex items-center space-x-5">
-           <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
-
-<a href="{% url 'home' %}"
-   class="text-5xl hover:scale-105 transition-transform duration-300"
-   style="font-family: 'Great Vibes', cursive; color: #5a3e2b; -webkit-text-stroke: 0.6px #5a3e2b;">
-    Nokshi<span style="color: #a9745b;">Box</span>
-</a>
-
+            <a href="{% url 'home' %}"
+               class="text-5xl hover:scale-105 transition-transform duration-300"
+               style="font-family: 'Great Vibes', cursive; color: #5a3e2b; -webkit-text-stroke: 0.6px #5a3e2b;">
+                Nokshi<span style="color: #a9745b;">Box</span>
+            </a>
 
             <div class="relative w-96 hidden md:block">
                 <input id="searchBar" type="text" placeholder="Search products here..."
@@ -72,37 +70,35 @@
                 <li><a href="{% url 'products' %}" class="hover:text-red-700 transition duration-300">Products</a></li>
                 <li><a href="{% url 'about' %}" class="hover:text-red-700 transition duration-300">About Us</a></li>
                 <li><a href="#" class="hover:text-red-700 transition duration-300">Contact Us</a></li>
-
-                    {% if user.is_authenticated %}
-                    <li><a href="{% url 'seller_home' %}" class="hover:text-red-700 transition duration-300">Dashboard</a></li>
-                    {% endif %}
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'seller_home' %}" class="hover:text-red-700 transition duration-300">Dashboard</a></li>
+                {% endif %}
             </ul>
 
-
             <div class="flex items-center space-x-3 text-sm">
-        {% if user.is_authenticated %}
-          <!-- Profile Dropdown -->
-          <div class="relative dropdown">
-            <button class="flex items-center space-x-2 focus:outline-none">
-              <img src="{% if user.profile.image %}{{ user_profile.photo.url }}{% else %}{% static 'image/default-profile.png' %}{% endif %}"
-                   alt="Profile"
-                   class="w-10 h-10 rounded-full border-2 border-[#d9b08c] object-cover">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#5a3e2b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+            {% if user.is_authenticated %}
+              <!-- Profile Dropdown -->
+              <div class="relative dropdown">
+                <button class="flex items-center space-x-2 focus:outline-none">
+                  <img src="{% if user.profile.image %}{{ user.profile.image.url }}{% else %}{% static 'image/id.jpg' %}{% endif %}"
+                       alt="{{ user.username }} profile image"
+                       title="{{ user.username }}"
+                       class="w-10 h-10 rounded-full border-2 border-[#d9b08c] object-cover">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#5a3e2b]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
 
-            <!-- Dropdown Menu -->
-            <div class="dropdown-menu absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-              <a href="{% url 'profile' user.id %}" class="block px-4 py-2 hover:bg-[#fce5dc] text-gray-700">Profile</a>
-              <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-[#fce5dc] text-gray-700">Logout</a>
-            </div>
-          </div>
-        {% else %}
-          <a href="{% url 'login' %}" class="bg-[#8B3E2F] text-white px-4 py-2 rounded-lg hover:bg-[#73342a] transition duration-300">Login</a>
-          <a href="{% url 'signup' %}" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Sign Up</a>
-        {% endif %}
-
+                <!-- Dropdown Menu -->
+                <div class="dropdown-menu absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 hidden">
+                  <a href="{% url 'profile' user.id %}" class="block px-4 py-2 hover:bg-[#fce5dc] text-gray-700">Profile</a>
+                  <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-[#fce5dc] text-gray-700">Logout</a>
+                </div>
+              </div>
+            {% else %}
+              <a href="{% url 'login' %}" class="bg-[#8B3E2F] text-white px-4 py-2 rounded-lg hover:bg-[#73342a] transition duration-300">Login</a>
+              <a href="{% url 'signup' %}" class="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition duration-300">Sign Up</a>
+            {% endif %}
              </div>
         </div>
     </div>
@@ -125,8 +121,10 @@
   </div>
 </footer>
 
-<!-- ✅ JavaScript Section -->
+<!-- JavaScript Section -->
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+
   // 🌸 Search Function
   const searchBar = document.getElementById('searchBar');
   if (searchBar) {
@@ -160,6 +158,16 @@
   scrollBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  // 🌸 Profile dropdown toggle
+  document.querySelectorAll('.dropdown > button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const menu = btn.nextElementSibling;
+      menu.classList.toggle('hidden');
+    });
+  });
+
+});
 </script>
 
 </body>

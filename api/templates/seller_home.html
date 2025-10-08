@@ -85,9 +85,9 @@
         <div class="flex items-center space-x-6">
             <!-- Nav Links -->
             <ul class="flex space-x-6">
-                <li><a href="#" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Home</a></li>
+                <li><a href="{%url 'home'%}" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Home</a></li>
                 <li><a href="#MyPost" class="text-black hover:text-[#a9745b] font-medium transition duration-300">My Posts</a></li>
-                <li><a href="#" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Products</a></li>
+                <li><a href="{%url 'products'%}" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Products</a></li>
             </ul>
 
             <!-- Profile Picture Dropdown -->
@@ -221,7 +221,7 @@
                 <div class="p-4 flex flex-col">
                     <h3 class="text-lg font-semibold text-[#3b2f2f] mb-1 truncate">{{ product.title }}</h3>
                     <p class="text-[#5a3e36] text-sm mb-1 truncate">{{ product.details|truncatechars:80 }}</p>
-                    <p class="text-[#65432d] font-bold mb-3">${{ product.price }}</p>
+                    <p class="text-[#65432d] font-bold mb-3">Tk {{ product.price }}</p>
                     <div class="mt-auto flex gap-2">
                         <a href="{% url 'edit_product' product.pk %}" class="bg-[#b5835a] text-[#3b2f2f] px-3 py-1 rounded hover:bg-[#a9745b] transition duration-300 flex-1 text-center text-sm">Edit</a>
                         <form method="post" action="{% url 'delete_product' product.pk %}" class="flex-1" onsubmit="return confirm('Are you sure you want to delete this product?');">

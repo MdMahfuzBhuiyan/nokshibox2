@@ -7,7 +7,7 @@
 <div class="min-h-screen flex flex-col items-center justify-center py-12 px-4 bg-cover bg-center"
      style="background-image: url('{% static 'image/background.jpg' %}');">
 
-    <div class="relative max-w-6xl w-full grid md:grid-cols-2 gap-12 items-start">
+    <div class="relative max-w-6xl w-full grid md:grid-cols-2 gap-8 items-start">
 
         <!-- Left: Product Image -->
         <div class="flex justify-center items-start">
@@ -41,7 +41,7 @@
                 {% if user.is_authenticated %}
                 <a href="{% url 'profile' product.seller.id %}"
                    class="flex-1 text-center bg-[#d9b08c] text-[#3b2f2f] font-semibold px-6 py-3 rounded-lg hover:bg-[#b5835a] hover:text-white transition duration-300 shadow-md">
-                   Contact Seller
+                   Contact with Seller
                 </a>
                 {% else %}
                 <a href="{% url 'login' %}?next={{ request.path }}"
