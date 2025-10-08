@@ -15,7 +15,10 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-
+def product(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'products.html', {'products': products, 'categories': categories})
 
 # Landing page for buyer or unregistered user
 def buyer_home(request):
@@ -74,9 +77,11 @@ def admin_logout(request):
 
 
 @login_required
+@login_required
 def seller_home(request):
     if request.user.role != 'seller':
         return redirect('buyer_home')
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
@@ -86,8 +91,15 @@ def seller_home(request):
             return redirect('seller_home')
     else:
         form = ProductForm()
+
     my_products = Product.objects.filter(seller=request.user)
-    return render(request, 'seller_home.html', {'form': form, 'my_products': my_products})
+
+    # Pass the logged-in user's profile for navbar
+    return render(request, 'seller_home.html', {
+        'form': form,
+        'my_products': my_products,
+        'user_profile': request.user
+    })
 
 
 def product_detail(request, pk):

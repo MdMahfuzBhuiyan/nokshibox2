@@ -1,20 +1,43 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Login-NokshiBox{% endblock %}
+{% block title %}Login - NokshiBox{% endblock %}
 
 {% block content %}
+<!-- Full-page background -->
+<div class="min-h-screen flex items-center justify-center bg-cover bg-center relative" style="background-image: url('{% static 'image/bannerr.jpg' %}');">
 
-<h3>Login</h3>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if next %}
-    <input type="hidden" name="next" value="{{ next }}">
-  {% endif %}
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
-<p class="mt-2">
-  Don't have an account? <a href="{% url 'signup' %}">Sign Up</a> |
-  <a href="{% url 'forget_password_request' %}">Forgot Password?</a>
-</p>
+    <!-- Overlay with backdrop blur -->
+    <div class="absolute inset-0 bg-black/30 backdrop-blur-sm"></div>
+
+    <!-- Login Form Container -->
+    <div class="relative z-10 w-full max-w-md p-10 bg-[#FFF8E7]/85 rounded-xl shadow-xl border-2 border-[#8B3E2F] transform -translate-y-4 transition duration-500 hover:scale-105 hover:shadow-2xl">
+
+        <!-- Close Button -->
+        <a href="{% url 'home' %}" class="absolute top-4 right-4 text-gray-700 hover:text-gray-900 text-2xl font-bold">&times;</a>
+
+        <h3 class="text-3xl font-bold mb-6 text-center text-gray-800">Login</h3>
+
+        <form method="post" id="loginForm" class="space-y-4">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <!-- Forgot Password on its own line -->
+            <div class="text-right mb-2">
+                <a href="{% url 'forget_password_request' %}" class="text-[#4B2E2A] underline text-sm">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="w-full bg-[#8B3E2F] text-white px-4 py-2 rounded-lg hover:bg-[#73342a] transition duration-300 font-semibold">Login</button>
+        </form>
+
+        <!-- Sign Up + Admin Link Inline -->
+        <p class="mt-4 text-center text-sm text-[#4B2E2A]">
+            Don't have an account?
+            <a href="{% url 'signup' %}" class="hover:underline px-1">Sign Up</a> |
+            <a href="{% url 'admin_login' %}" class="hover:underline px-1 text-gray-900">Admin Login</a>
+        </p>
+
+    </div>
+</div>
+
 {% endblock %}

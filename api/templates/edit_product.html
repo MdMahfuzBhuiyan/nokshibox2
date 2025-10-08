@@ -1,13 +1,87 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Product - NokshiBox</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Floating animation for soft shapes */
+    .floating {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 25s linear infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-40px) rotate(180deg); }
+      100% { transform: translateY(0) rotate(360deg); }
+    }
+    /* Hover lift effect */
+    .hover-up:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen bg-cover bg-center bg-fixed text-[#3b2f2f]"
+      style="background-image: url('{% static 'image/cp.png' %}');">
 
-{% block title %}Edit Product - NokshiBox{% endblock %}
+<!-- Navbar -->
+<nav class="bg-[#f5f0e6]/95 backdrop-blur-md shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <a href="#" class="text-5xl hover:scale-105 transition-transform duration-300"
+       style="font-family: 'Great Vibes', cursive; color: #5a3e2b; -webkit-text-stroke: 0.6px #5a3e2b;">
+      Nokshi<span style="color: #a9745b;">Box</span>
+    </a>
 
-{% block content %}
-<h3>Edit Product: {{ product.title }}</h3>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Save Changes</button>
-    <a href="{% url 'seller_home' %}" class="btn btn-secondary">Cancel</a>
-</form>
-{% endblock %}
+    <ul class="flex space-x-6">
+      <li><a href="/" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Home</a></li>
+      <li><a href="{% url 'seller_home' %}" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Dashboard</a></li>
+      <li><a href="{% url 'logout' %}" class="text-black hover:text-[#a9745b] font-medium transition duration-300">Logout</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Floating background shapes -->
+<div class="floating w-40 h-40 bg-[#d9b08c] top-10 left-20"></div>
+<div class="floating w-28 h-28 bg-[#c49a6c] bottom-16 right-32"></div>
+<div class="floating w-20 h-20 bg-[#b5835a] top-1/2 left-1/3"></div>
+
+<!-- Main Content -->
+<div class="relative max-w-2xl mx-auto mr-32 px-6 py-16 z-10">
+  <div class="bg-[#f5f0e6]/70 border border-[#c49a6c]/90 shadow-2xl rounded-2xl p-10 hover-up transition duration-500">
+
+    <!-- Title -->
+    <h2 class="text-3xl font-extrabold text-center text-[#3b2f2f] mb-6 border-b-4 border-[#b5835a] pb-2">
+       Edit Product
+    </h2>
+
+    <!-- Form -->
+    <form method="post" enctype="multipart/form-data" class="space-y-5">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      <div class="flex flex-wrap justify-center gap-4 mt-6">
+        <button type="submit"
+                class="bg-gradient-to-r from-[#c49a6c] to-[#b5835a] text-[#3b2f2f] font-semibold px-6 py-2 rounded-lg hover:from-[#b5835a] hover:to-[#a9745b] transition duration-300 transform hover:scale-105 shadow-md">
+          💾 Save Changes
+        </button>
+        <a href="{% url 'seller_home' %}"
+           class="bg-[#fff2d1] text-[#3b2f2f] font-semibold px-6 py-2 rounded-lg border border-[#b5835a]/60 hover:bg-[#f5e8ca] transition duration-300 shadow-md">
+          ✖ Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-[#f5f0e6]/95 text-center text-[#3b2f2f] border-t border-[#b5835a]/50 py-4 mt-10 shadow-inner">
+  <p>© 2025 <span class="font-semibold text-[#a9745b]">NokshiBox</span> — Empowering Local Artisans 🌸</p>
+</footer>
+
+</body>
+</html>

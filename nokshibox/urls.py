@@ -23,7 +23,8 @@ urlpatterns = [
     # Template views
     path('', views_templates.home, name='home'),
     path('about/', views_templates.about, name='about'),
-    path('', views_templates.buyer_home, name='buyer_home'),
+    path('products/', views_templates.product, name='products'),
+    path('buyer/', views_templates.buyer_home, name='buyer_home'),
     path('signup/', views_templates.signup_view, name='signup'),
     path('login/', views_templates.login_view, name='login'),
     path('logout/', views_templates.logout_view, name='logout'),

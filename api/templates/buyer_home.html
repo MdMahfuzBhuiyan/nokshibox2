@@ -1,62 +1,85 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Buyer Home - NokshiBox{% endblock %}
 
 {% block nav_items %}
-<li class="nav-item"><a class="nav-link" href="{% url 'buyer_home' %}">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'buyer_home' %}">Products</a></li>
 <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
 <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
 {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="min-h-screen py-12 px-4 bg-cover bg-center" style="background-image: url('{% static 'image/background.jpg' %}');">
+
+  <div class="max-w-6xl mx-auto flex flex-col md:flex-row ml-4 gap-6">
+
     <!-- Categories Sidebar -->
-    <div class="col-md-3">
-        <h5>Categories</h5>
-        <ul class="list-group" id="category-list">
-            <li class="list-group-item active" data-category="all">All</li>
-            {% for category in categories %}
-                <li class="list-group-item" data-category="{{ category.id }}">{{ category.name }}</li>
-            {% endfor %}
-        </ul>
+    <div class="md:w-1/4 flex flex-col items-center bg-white/50 backdrop-blur-sm rounded-3xl p-6 border-4 border-[#d9b08c] shadow-lg ml-1">
+
+      <!-- Logo -->
+      <div class="w-50 h-32 mb-4">
+          <img src="{% static 'image/pr.png' %}" alt="Logo" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Title -->
+      <h5 class="text-[#3b2f2f] font-bold text-xl mb-6 relative after:absolute after:left-1/2 after:-bottom-1 after:w-40 after:h-1 after:bg-[#d9b08c] after:-translate-x-1/2">
+          Categories
+      </h5>
+
+      <!-- Category List -->
+      <ul class="flex flex-col items-center justify-center space-y-4 text-[#3b2f2f] font-semibold text-lg" id="category-list">
+          <li class="cursor-pointer relative group px-4 py-2 rounded hover:bg-[#d9b08c] hover:text-white transition" data-category="all">
+              <span class="relative z-10">All</span>
+              <span class="absolute bottom-0 left-1/2 w-0 h-1 bg-[#d9b08c] transition-all group-hover:w-full group-hover:-translate-x-1/2"></span>
+          </li>
+          {% for category in categories %}
+          <li class="cursor-pointer relative group px-4 py-2 rounded hover:bg-[#d9b08c] hover:text-white transition" data-category="{{ category.id }}">
+              <span class="relative z-10">{{ category.name }}</span>
+              <span class="absolute bottom-0 left-1/2 w-0 h-1 bg-[#d9b08c] transition-all group-hover:w-full group-hover:-translate-x-1/2"></span>
+          </li>
+          {% endfor %}
+      </ul>
     </div>
 
-    <!-- Products + Search -->
-    <div class="col-md-9">
-        <!-- 🔍 Search Bar (only here now) -->
-        <div class="mb-3">
-            <input 
-                type="text" 
-                id="searchBar" 
-                class="form-control" 
-                placeholder="Search products...">
-        </div>
+    <!-- Product Section -->
+    <div class="md:w-3/4">
 
-        <!-- Product Grid -->
-        <div class="row" id="product-grid">
-            {% for product in products %}
-            <div class="col-md-4 mb-3 product-card" data-category="{{ product.category.id }}">
-                <div class="card h-100">
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.title }}</h5>
-                        <p class="card-text">${{ product.price }}</p>
-                        <a href="{% url 'product_detail' product.id %}" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+
+      <!-- Product Grid -->
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {% for product in products %}
+          <div class="product-card bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105" data-category="{{ product.category.id }}">
+              <img
+                  src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'images/default.png' %}{% endif %}"
+                  alt="{{ product.title }}"
+                  class="w-full h-48 object-cover">
+              <div class="p-4">
+                  <h5 class="card-title font-semibold text-lg text-[#3b2f2f] mb-1">{{ product.title }}</h5>
+                  <p class="card-text text-[#b46f40] font-semibold mb-2">Tk {{ product.price }}</p>
+                  <a href="{% url 'product_detail' product.id %}"
+                     class="inline-block bg-[#d9b08c] text-[#3b2f2f] px-4 py-2 rounded-lg font-semibold hover:bg-[#b5835a] hover:text-white transition shadow-md">
+                      View Details
+                  </a>
+              </div>
+          </div>
+          {% empty %}
+          <p class="text-gray-200 col-span-full">No products available.</p>
+          {% endfor %}
+      </div>
     </div>
+
+  </div>
 </div>
 
 <!-- Category Filter Script -->
 <script>
 document.querySelectorAll('#category-list li').forEach(item => {
     item.addEventListener('click', function() {
-        document.querySelectorAll('#category-list li').forEach(li => li.classList.remove('active'));
-        this.classList.add('active');
+        document.querySelectorAll('#category-list li').forEach(li => li.classList.remove('bg-[#d9b08c]', 'text-white'));
+        this.classList.add('bg-[#d9b08c]', 'text-white');
+
         let selected = this.dataset.category;
         document.querySelectorAll('.product-card').forEach(card => {
             card.style.display = (selected === 'all' || card.dataset.category === selected) ? 'block' : 'none';
@@ -65,21 +88,14 @@ document.querySelectorAll('#category-list li').forEach(item => {
 });
 </script>
 
-<!-- Search Bar Script -->
+<!-- Search Functionality -->
 <script>
 document.getElementById('searchBar').addEventListener('keyup', function() {
-    let searchValue = this.value.toLowerCase();
-    let products = document.querySelectorAll('.product-card');
-
-    products.forEach(product => {
-        let title = product.querySelector('.card-title').innerText.toLowerCase();
-        let price = product.querySelector('.card-text').innerText.toLowerCase();
-
-        if (title.includes(searchValue) || price.includes(searchValue)) {
-            product.style.display = "block";
-        } else {
-            product.style.display = "none";
-        }
+    let value = this.value.toLowerCase();
+    document.querySelectorAll('.product-card').forEach(card => {
+        let title = card.querySelector('.card-title').innerText.toLowerCase();
+        let price = card.querySelector('.card-text').innerText.toLowerCase();
+        card.style.display = (title.includes(value) || price.includes(value)) ? 'block' : 'none';
     });
 });
 </script>
